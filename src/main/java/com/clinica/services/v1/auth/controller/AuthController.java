@@ -51,7 +51,6 @@ public class AuthController {
     )
     public Mono<ResponseEntity<AuthResponse>> login(@Valid @RequestBody AuthRequest authRequest, ServerHttpRequest request) {
         logger.info("Inicio login");
-        //logger.info("Request obtenido AuthRequest : {}", util.toJsonString( authRequest));
         if (logger.isInfoEnabled()) {
             logger.info("Request obtenido AuthRequest : {}", Util.toJsonString(authRequest));
         }
