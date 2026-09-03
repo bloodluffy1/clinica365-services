@@ -1,70 +1,153 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+		 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		 xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+
 	<modelVersion>4.0.0</modelVersion>
+
+	<!-- ====================================================== -->
+	<!-- SPRING BOOT                                             -->
+	<!-- ====================================================== -->
+
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
 		<version>3.2.5</version>
-		<relativePath/> <!-- lookup parent from repository -->
+		<relativePath/>
 	</parent>
+
+
+	<!-- ====================================================== -->
+	<!-- INFORMACIÓN DEL PROYECTO                               -->
+	<!-- ====================================================== -->
 
 	<groupId>com.clinica</groupId>
 	<artifactId>clinica365-services</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>clinica365-services</name>
-	<description>proyecto clinico</description>
-	<url/>
-	<licenses>
-		<license/>
-	</licenses>
-	<developers>
-		<developer/>
-	</developers>
-	<scm>
-		<connection/>
-		<developerConnection/>
-		<tag/>
-		<url/>
-	</scm>
-	<properties>
-		<java.version>17</java.version>
-		<!-- Configuración de SonarCloud -->
-		<sonar.projectKey>ftapiaco_clinica365-services</sonar.projectKey>
-		<sonar.organization>ftapiaco</sonar.organization>
-		<sonar.host.url>https://sonarcloud.io</sonar.host.url>
 
-		<!-- Configuración de código fuente y pruebas -->
+	<name>clinica365-services</name>
+	<description>Proyecto clinico</description>
+
+
+	<!-- ====================================================== -->
+	<!-- PROPIEDADES                                             -->
+	<!-- ====================================================== -->
+
+	<properties>
+
+		<!-- Java -->
+		<java.version>17</java.version>
+
+
+		<!-- ================================================== -->
+		<!-- SONARQUBE COMMUNITY                                -->
+		<!-- ================================================== -->
+
+		<!-- Debe coincidir con el Project Key creado en SonarQube -->
+		<sonar.projectKey>clinica365-services</sonar.projectKey>
+
+		<sonar.projectName>clinica365-services</sonar.projectName>
+
+		<!-- SonarQube Community local -->
+		<sonar.host.url>http://localhost:9000</sonar.host.url>
+
+
+		<!-- ================================================== -->
+		<!-- CÓDIGO FUENTE Y PRUEBAS                            -->
+		<!-- ================================================== -->
+
 		<sonar.sources>src/main/java</sonar.sources>
+
 		<sonar.tests>src/test/java</sonar.tests>
+
+		<!-- Clases compiladas -->
 		<sonar.java.binaries>target/classes</sonar.java.binaries>
 
-		<!-- Reporte de cobertura generado por JaCoCo -->
-		<sonar.coverage.jacoco.xmlReportPaths>target/site/jacoco/jacoco.xml</sonar.coverage.jacoco.xmlReportPaths>
 
-		<!-- Exclusiones generales -->
-		<sonar.exclusions>**/generated/**,**/model/**,**/*Application*.java</sonar.exclusions>
+		<!-- ================================================== -->
+		<!-- JACOCO                                               -->
+		<!-- ================================================== -->
 
-		<!-- Exclusiones solo de cobertura -->
-		<sonar.coverage.exclusions>**/dto/**,**/config/**,**/mapper/**,**/domain/**,**/test/**,**/exception/**</sonar.coverage.exclusions>
+		<!-- Archivo XML generado por JaCoCo -->
+		<sonar.coverage.jacoco.xmlReportPaths>
+			target/site/jacoco/jacoco.xml
+		</sonar.coverage.jacoco.xmlReportPaths>
 
+
+		<!-- ================================================== -->
+		<!-- EXCLUSIONES DEL ANÁLISIS                            -->
+		<!-- ================================================== -->
+
+		<!-- Estos archivos no serán analizados por SonarQube -->
+		<sonar.exclusions>
+			**/generated/**,
+			**/model/**,
+			**/*Application*.java
+		</sonar.exclusions>
+
+
+		<!-- ================================================== -->
+		<!-- EXCLUSIONES SOLAMENTE DE COBERTURA                  -->
+		<!-- ================================================== -->
+
+		<!-- SonarQube analiza estos archivos,
+             pero no exige cobertura sobre ellos -->
+		<sonar.coverage.exclusions>
+			**/dto/**,
+			**/config/**,
+			**/mapper/**,
+			**/domain/**,
+			**/exception/**
+		</sonar.coverage.exclusions>
 
 	</properties>
+
+
+	<!-- ====================================================== -->
+	<!-- DEPENDENCIAS                                            -->
+	<!-- ====================================================== -->
+
 	<dependencies>
+
+		<!-- ================================================== -->
+		<!-- SPRING DATA MONGODB REACTIVE                        -->
+		<!-- ================================================== -->
 
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-data-mongodb-reactive</artifactId>
 		</dependency>
+
+
+		<!-- ================================================== -->
+		<!-- SPRING WEBFLUX                                      -->
+		<!-- ================================================== -->
+
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-webflux</artifactId>
 		</dependency>
 
+
+		<!-- ================================================== -->
+		<!-- SPRING SECURITY                                     -->
+		<!-- ================================================== -->
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-security</artifactId>
+		</dependency>
+
+
+		<!-- ================================================== -->
+		<!-- SPRING BOOT TEST                                    -->
+		<!-- ================================================== -->
+
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
+
 			<exclusions>
 				<exclusion>
 					<groupId>org.junit.vintage</groupId>
@@ -74,6 +157,9 @@
 		</dependency>
 
 
+		<!-- ================================================== -->
+		<!-- REACTOR TEST                                        -->
+		<!-- ================================================== -->
 
 		<dependency>
 			<groupId>io.projectreactor</groupId>
@@ -81,44 +167,68 @@
 			<scope>test</scope>
 		</dependency>
 
+
+		<!-- ================================================== -->
+		<!-- SPRINGDOC / SWAGGER                                -->
+		<!-- ================================================== -->
+
 		<dependency>
 			<groupId>org.springdoc</groupId>
 			<artifactId>springdoc-openapi-starter-webflux-ui</artifactId>
 			<version>2.3.0</version>
 		</dependency>
 
+
+		<!-- ================================================== -->
+		<!-- LOMBOK                                               -->
+		<!-- ================================================== -->
+
 		<dependency>
 			<groupId>org.projectlombok</groupId>
 			<artifactId>lombok</artifactId>
-			<version>1.18.30</version> <!-- o la última versión estable -->
+			<version>1.18.30</version>
 			<scope>provided</scope>
 		</dependency>
 
 
-		<!-- Spring WebFlux + Security -->
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-security</artifactId>
-		</dependency>
+		<!-- ================================================== -->
+		<!-- JWT API                                              -->
+		<!-- ================================================== -->
 
-		<!-- JWT -->
 		<dependency>
 			<groupId>io.jsonwebtoken</groupId>
 			<artifactId>jjwt-api</artifactId>
 			<version>0.11.5</version>
 		</dependency>
+
+
+		<!-- ================================================== -->
+		<!-- JWT IMPLEMENTATION                                   -->
+		<!-- ================================================== -->
+
 		<dependency>
 			<groupId>io.jsonwebtoken</groupId>
 			<artifactId>jjwt-impl</artifactId>
 			<version>0.11.5</version>
 			<scope>runtime</scope>
 		</dependency>
+
+
+		<!-- ================================================== -->
+		<!-- JWT JACKSON                                          -->
+		<!-- ================================================== -->
+
 		<dependency>
 			<groupId>io.jsonwebtoken</groupId>
 			<artifactId>jjwt-jackson</artifactId>
 			<version>0.11.5</version>
 			<scope>runtime</scope>
 		</dependency>
+
+
+		<!-- ================================================== -->
+		<!-- JUNIT 5                                              -->
+		<!-- ================================================== -->
 
 		<dependency>
 			<groupId>org.junit.jupiter</groupId>
@@ -129,47 +239,105 @@
 
 	</dependencies>
 
+
+	<!-- ====================================================== -->
+	<!-- BUILD                                                   -->
+	<!-- ====================================================== -->
+
 	<build>
+
 		<plugins>
+
+			<!-- ================================================== -->
+			<!-- SPRING BOOT MAVEN PLUGIN                           -->
+			<!-- ================================================== -->
+
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
-			<!-- JaCoCo plugin para cobertura -->
+
+
+			<!-- ================================================== -->
+			<!-- JACOCO - COBERTURA                                 -->
+			<!-- ================================================== -->
+
 			<plugin>
 				<groupId>org.jacoco</groupId>
 				<artifactId>jacoco-maven-plugin</artifactId>
-				<version>0.8.10</version>
+				<version>0.8.13</version>
+
 				<executions>
+
+					<!--
+                        Prepara el agente JaCoCo antes de ejecutar
+                        las pruebas.
+                    -->
 					<execution>
 						<id>prepare-agent</id>
+
 						<goals>
 							<goal>prepare-agent</goal>
 						</goals>
 					</execution>
+
+
+					<!--
+                        Genera el reporte XML/HTML de cobertura
+                        después de ejecutar los tests.
+                    -->
 					<execution>
 						<id>report</id>
+
 						<phase>verify</phase>
+
 						<goals>
 							<goal>report</goal>
 						</goals>
 					</execution>
+
 				</executions>
+
 			</plugin>
+
+
+			<!-- ================================================== -->
+			<!-- SONARQUBE MAVEN SCANNER                            -->
+			<!-- ================================================== -->
+
+			<plugin>
+				<groupId>org.sonarsource.scanner.maven</groupId>
+				<artifactId>sonar-maven-plugin</artifactId>
+				<version>5.5.0.6356</version>
+			</plugin>
+
+
+			<!-- ================================================== -->
+			<!-- MAVEN COMPILER + LOMBOK                             -->
+			<!-- ================================================== -->
+
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
+
 				<configuration>
+
 					<annotationProcessorPaths>
+
 						<path>
 							<groupId>org.projectlombok</groupId>
 							<artifactId>lombok</artifactId>
 							<version>1.18.30</version>
 						</path>
+
 					</annotationProcessorPaths>
+
 				</configuration>
+
 			</plugin>
+
 		</plugins>
+
 	</build>
 
 
